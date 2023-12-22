@@ -35,8 +35,8 @@ jobs:
 
       - name: commit files
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.email "Seonavez@gmail.com"
+          git config --local user.name "@Navezjt"
           git add -A
           git diff-index --quiet HEAD || (git commit -a -m "Updated M3U files on ${{ steps.date.outputs.date }}" --allow-empty)
 
