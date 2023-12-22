@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Get current date
         id: date
-        run: echo "::save-state name=date::$(date +'%Y-%m-%d')"
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
 
       - name: checkout repo content
         uses: actions/checkout@v3
