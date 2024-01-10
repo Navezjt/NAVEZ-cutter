@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Get current date
         id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
 
       - name: checkout repo content
         uses: actions/checkout@v3
@@ -30,19 +30,22 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: execute py script
+      - name: execute main.py script
         run: python main.py
+
+      - name: execute curated.py script
+        run: python curated.py
 
       - name: commit files
         run: |
-          git config --local user.email "Seonavez@gmail.com"
-          git config --local user.name "@Navezjt"
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
           git add -A
           git diff-index --quiet HEAD || (git commit -a -m "Updated M3U files on ${{ steps.date.outputs.date }}" --allow-empty)
 
 
       - name: push changes
-        uses: ad-m/github-push-action@v0.8.0
+        uses: ad-m/github-push-action@v0.6.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: master
